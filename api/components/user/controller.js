@@ -18,8 +18,18 @@ module.exports = function(injectedStore) {
         return store.get(TABLE, id);
     }
 
+    function post(data){
+        return store.upsert(TABLE, data);
+    }
+
+    function remove(id){
+        return store.remove(TABLE, id);
+    }
+
     return {
         list,
-        get
+        get,
+        post,
+        remove
     }
 }

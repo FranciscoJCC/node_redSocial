@@ -16,10 +16,15 @@ async function get(table, id) {
 }
 
 async function upsert(table, data) {
-    db[collection].push(data);
+    db[table].push(data);
+
+    return data;
 }
 
 async function remove(table, id) {
+
+    db[table] = db[table].filter(item => item.id !== id);
+
     return true;
 }
 
