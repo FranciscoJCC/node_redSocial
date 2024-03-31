@@ -12,16 +12,17 @@ module.exports = function (injectedStore){
     async function login(username, password){
         const data = await store.query(TABLE, { username: username });
         
-        return bcrypt.compare(password, data.password)
-            .then(isMatch => {
-                //Si las contraseñas no coinciden, retornamos un error
-                if(!isMatch){
-                    throw new Error('Invalid Information');
-                }else{
-                    //Retornamos token 
-                    return auth.sign(data);
-                }
-            });
+        const isMatch = await bcrypt.compare(password, data.password);
+
+        //Si las contraseñas no coinciden, retornamos un error
+        if(!isMatch){
+            throw new Error('Invalid Information');
+        }
+        
+        
+        //Retornamos token 
+        return auth.sign(data);
+        
     }
 
     async function upsert(data){
