@@ -6,7 +6,7 @@
       "title": "RedSocialNode"
     },
     "host": "localhost:3000",
-    "basePath": "/api",
+    "basePath": "/api/",
     "tags": [
       {
         "name": "user",

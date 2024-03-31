@@ -1,3 +1,5 @@
+const {v4 : uuidv4 } = require('uuid');
+const auth = require('../auth');
 const TABLE = 'user';
 
 
@@ -18,8 +20,22 @@ module.exports = function(injectedStore) {
         return store.get(TABLE, id);
     }
 
-    function post(data){
-        return store.upsert(TABLE, data);
+    async function post(data){
+        const user =  {
+            id: (data.id) ? data.id : uuidv4(),
+            name: data.name,
+            username: data.username
+        };
+
+        if(data.password || data.username){
+            await auth.upsert({
+                id: user.id,
+                username: user.username,
+                password: data.password,
+            })
+        }
+
+        return store.upsert(TABLE, user);
     }
 
     function remove(id){

@@ -16,7 +16,16 @@ async function get(table, id) {
 }
 
 async function upsert(table, data) {
+
+    //Si no existe la tabla, la crea, "un array vacio"
+    if(!db[table])
+        db[table] = [];
+
+    //Agregamos la información
     db[table].push(data);
+
+    console.log('data user:', db);
+    
 
     return data;
 }
