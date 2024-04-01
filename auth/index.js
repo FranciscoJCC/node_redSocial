@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const CONFIG = require('../config');
+const error = require('./../utils/error');
 
 const secret = CONFIG.jwt.secret;
 
@@ -22,7 +23,7 @@ const check = {
         console.log('decoded: ', decoded);
 
         if(decoded.id !== owner) {
-            throw new Error('Don´t permission this action');
+            throw error('Don´t permission this action', 401);
         }
 
 
@@ -31,7 +32,7 @@ const check = {
 
 function getToken(auth){
     if(!auth){
-        throw new Error('Token is required');
+        throw error('Token is required', 401);
     }
 
     if(auth.indexOf('Bearer ') === -1 ){
