@@ -8,13 +8,24 @@ function sign(data){
 }
 
 function verify(token){
-    return jwt.verify(token, secret);
+    try {
+        return jwt.verify(token, secret);
+    } catch (error) {
+        throw new Error(error.message);
+    }
+    
 }
 
 const check = {
     own: function(req, owner) {
         const decoded = decodeHeader(req);
         console.log('decoded: ', decoded);
+
+        if(decoded.id !== owner) {
+            throw new Error('Don´t permission this action');
+        }
+
+
     }
 }
 
@@ -44,4 +55,5 @@ function decodeHeader(req) {
 
 module.exports = {
     sign,
+    check
 }

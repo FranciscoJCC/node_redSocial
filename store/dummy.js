@@ -24,7 +24,7 @@ async function upsert(table, data) {
     //Agregamos la información
     db[table].push(data);
 
-    console.log('data user:', db);
+    /* console.log('data user:', db); */
     
 
     return data;
