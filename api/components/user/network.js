@@ -34,6 +34,17 @@ router.post('/', function (req, res) {
         });
 });
 
+router.patch('/', function (req, res) {
+    
+    userController.post(req.body)
+        .then((user) => {
+            response.success(req, res, user, 201);
+        })
+        .catch((error) => {
+            response.error(req, res, error.message, 500);
+        });
+});
+
 router.delete('/:id', function (req, res){
     userController.remove(req.params.id)
         .then((user) => {
