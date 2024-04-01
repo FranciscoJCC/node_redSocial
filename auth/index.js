@@ -36,7 +36,7 @@ function getToken(auth){
     }
 
     if(auth.indexOf('Bearer ') === -1 ){
-        throw new Error('Token format is invalid')
+        throw error('Token format is invalid', 401);
     }
 
     let token = auth.replace('Bearer ', '');
