@@ -22,14 +22,12 @@ module.exports = function(injectedStore) {
 
     async function post(data){
         const user =  {
-            id: (data.id) ? data.id : uuidv4(),
             name: data.name,
             username: data.username
         };
 
         if(data.password || data.username){
             await auth.upsert({
-                id: user.id,
                 username: user.username,
                 password: data.password,
             })

@@ -21,6 +21,8 @@ const check = {
     own: function(req, owner) {
         const decoded = decodeHeader(req);
         console.log('decoded: ', decoded);
+        console.log('OWNER', owner);
+        
 
         if(decoded.id !== owner) {
             throw error('Don´t permission this action', 401);

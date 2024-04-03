@@ -12,8 +12,9 @@ module.exports = function (injectedStore){
     async function login(username, password){
         const data = await store.query(TABLE, { username: username });
         
+        
         const isMatch = await bcrypt.compare(password, data.password);
-
+        console.log('DATA: ', isMatch);
         //Si las contraseñas no coinciden, retornamos un error
         if(!isMatch){
             throw new Error('Invalid Information');
