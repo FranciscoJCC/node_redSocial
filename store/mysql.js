@@ -75,7 +75,18 @@ function update(table, data){
     });
 }
 
+function follow(data){
+    return new Promise( (resolve, reject) => {
+        conecction.query(`INSERT INTO user_follow SET ?`, data, (err, result) => {
+            if(err) return reject(err);
+
+            resolve(result);
+        })
+    });
+}
+
 async function upsert(table, data) {
+    
     if(data && data.id){
         return insert(table, data);
     }else{
@@ -104,5 +115,6 @@ module.exports = {
     list,
     get,
     upsert,
+    follow,
     query
 };

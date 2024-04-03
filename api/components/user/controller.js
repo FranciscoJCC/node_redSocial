@@ -40,10 +40,18 @@ module.exports = function(injectedStore) {
         return store.remove(TABLE, id);
     }
 
+    function follow(from, to){    
+        return store.follow({
+            user_from: from,
+            user_to: to
+        });
+    }
+
     return {
         list,
         get,
         post,
-        remove
+        remove,
+        follow
     }
 }

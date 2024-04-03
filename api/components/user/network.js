@@ -14,6 +14,19 @@ router.get('/', function (req, res) {
     
 });
 
+/* FOLLOW */
+router.post('/follow/:id',
+    authSecure('follow'), 
+    function (req, res, next) {
+        let id = req.params.id;
+        
+        userController.follow(req.user.id, parseInt(id))
+            .then(data => {
+                response.success(req, res, data, 201);
+            }).catch(next);
+    }
+);
+
 router.get('/:id', function (req, res) {
     userController.get(req.params.id)
         .then((user) => {
