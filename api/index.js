@@ -13,7 +13,7 @@ app.use(express.json());
 const swaggerDoc = require('./swagger.json');
 
 //Rutas
-app.use('/api/user', user);
+app.use('/api/users', user);
 app.use('/api/auth', auth);
 //Documentación de API Swager
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
