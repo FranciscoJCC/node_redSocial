@@ -94,18 +94,29 @@ async function upsert(table, data) {
     }
 }
 
-async function query(table, query){
+async function query(table, query, join){
+    let joinQuery = '';
+    console.log('JOIN:::', join);
+    
+    if(join){
+        const key = Object.keys(join)[0];
+        const val = join[key];
+        joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+    }
     return new Promise((resolve, reject) => {
-        conecction.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
+        conecction.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query, (err, res) => {
             if(err) return reject(err);
 
+            let output = res
             //output
-            let output = {
-                id: res[0].id,
-                username: res[0].username,
-                password: res[0].password
+            if(!join){
+                output = {
+                    id: res[0].id,
+                    username: res[0].username,
+                    password: res[0].password
+                }
             }
-
+            
             resolve(output, null);
         });
     })

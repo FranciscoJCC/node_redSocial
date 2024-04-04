@@ -27,6 +27,13 @@ router.post('/follow/:id',
     }
 );
 
+router.get('/:id/following', function (req, res, next){
+    userController.following(req.params.id)
+        .then( (data) => {
+            return response.success(req, res, data, 200);
+        }).catch(next);
+});
+
 router.get('/:id', function (req, res) {
     userController.get(req.params.id)
         .then((user) => {
