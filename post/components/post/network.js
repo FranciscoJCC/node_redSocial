@@ -1,6 +1,6 @@
 const express = require('express');
 /* const authSecure = require('./secure'); */
-const response = require('./../../../network/response');
+const response = require('../../../network/response');
 const postController = require('./index');
 
 const router = express.Router();
