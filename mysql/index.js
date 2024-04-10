@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //RUTAS
-app.use('/api/v1', router);
+app.use('/', router);
 
 app.listen(config.mysqlService.port, () => {
     console.log('Servicio mysql escuchando en', config.mysqlService.port);
