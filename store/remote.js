@@ -16,8 +16,12 @@ createRemoteDB = (host, port) => {
     }
 
     async function upsert(table, data){
-        let body = JSON.stringify(data);
-        const response = await fetch(`${URL}/${table}/${body}`);
+        const response = await fetch(`${URL}/${table}`, {
+            method: 'post',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json'}
+        });
+        
         const resp = await response.json();
         return resp?.body;
     }

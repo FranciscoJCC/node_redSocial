@@ -88,9 +88,9 @@ function follow(data){
 async function upsert(table, data) {
     
     if(data && data.id){
-        return insert(table, data);
-    }else{
         return update(table, data);
+    }else{
+        return insert(table, data);
     }
 }
 
